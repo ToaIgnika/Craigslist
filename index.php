@@ -32,10 +32,11 @@
         max-width: 80%;
     }
 </style>
+
 <body>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark ">
-    <a class="navbar-brand mx-auto" href="#">Craigslist</a>
-    <form class="form-inline mx-auto" action="/action_page.php">
+    <a class="navbar-brand mx-auto" href="index.php">Craigslist</a>
+    <form  class="form-inline mx-auto" action="/action_page.php">
         <input class="form-control mr-sm-2" type="text" placeholder="Search">
         <button class="btn btn-success" type="submit">Search</button>
     </form>
@@ -53,22 +54,24 @@
     <div class="row">
         <div class="col">
             <?php
-            load_index_list('Community', 'community.txt');
-            load_index_list('Personals', 'personals.txt');
+            load_index_list('Community', 'ccc.txt');
+            load_index_list('Personals', 'ppp.txt');
+            load_index_list('Services', 'bbb.txt');
             ?>
         </div>
 
         <div class="col">
             <?php
-            load_index_list('Housing', 'housing.txt');
-            load_index_list('For Sale', 'forsale.txt');
+            load_index_list('Housing', 'hhh.txt');
+            load_index_list('For Sale', 'sss.txt');
             ?>
         </div>
 
         <div class="col">
             <?php
-            load_index_list('Jobs', 'jobs.txt');
-            load_index_list('Gigs', 'gigs.txt');
+            load_index_list('Jobs', 'jjj.txt');
+            load_index_list('Gigs', 'ggg.txt');
+            load_index_list('Resume', 'rrr.txt');
             ?>
         </div>
     </div>
@@ -86,7 +89,7 @@ function load_index_list($name, $file_name) {
     echo '<table class="table table-sm">
                 <thead class="thead-light">
                 <tr >
-                    <th colspan="2">'.$name.'</th>
+                    <th colspan="2"><a href="search.php?catAbb='.substr($file_name, 0,3).'" class="">'.$name.'</a></th>
                 </tr>
                 </thead>
                 <tbody>';
@@ -99,8 +102,8 @@ function load_index_list($name, $file_name) {
         }
         // TODO encode url for search page
         echo ' <tr>
-                    <td><a href="#" class="">'.$f_l.'</a></td>
-                    <td><a href="#" class="">'.$f_r.'</a></td>
+                    <td><a href="search.php?catAbb='.substr($file_name, 0,3)."&subcatAbb=$f_l".'" class="">'.$f_l.'</a></td>
+                    <td><a href="search.php?catAbb='.substr($file_name, 0,3)."&subcatAbb=$f_r".'" class="">'.$f_r.'</a></td>
                 </tr>';
     }
     echo '</tbody>
