@@ -43,6 +43,7 @@
     onload = function () {
         $(function() {
             $('#catAbb').change(function() {
+                $('#subcatAbb').val('all');
                 this.form.submit();
             });
         });
@@ -70,7 +71,7 @@
         //echo $subcat;
         load_subcats($cat,$subcat);
         ?>
-    </form>
+
     <ul class="navbar-nav mx-auto">
             <li class="nav-item">
                 <a class="nav-link" href="#">post</a>
@@ -93,26 +94,22 @@
                     Start Bootstrap
                 </a>
             </li>
+
             <li>
-                <a href="#">Dashboard</a>
+                <div>
+                    <?php
+                    $cl = '';
+                    if (isset($_GET['check_list'])) {
+                        $cl = $_GET['check_list'];
+                    }
+                    load_cat_checkboxes($cat,$subcat, $cl);
+                    ?>
+                </div>
             </li>
-            <li>
-                <a href="#">Shortcuts</a>
-            </li>
-            <li>
-                <a href="#">Overview</a>
-            </li>
-            <li>
-                <a href="#">Events</a>
-            </li>
-            <li>
-                <a href="#">About</a>
-            </li>
-            <li>
-                <a href="#">Services</a>
-            </li>
-            <li>
-                <a href="#">Contact</a>
+            <li class="form-inline">
+                <button type="submit" class="btn btn-warning btn-sm">reset search</button>
+
+                <button type="submit" class="btn btn-warning btn-sm">update search</button>
             </li>
         </ul>
     </div>
@@ -121,12 +118,18 @@
     <!-- Page Content -->
     <div id="page-content-wrapper">
         <div class="container-fluid">
-            <h1>Simple Sidebar</h1>
-            <p>This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>
+            <div class="form-inline">
+            <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle"><></a>
+            <input class="form-control" type="text" placeholder="Search" style="width:70%; min-width:7em">
+            <button class="btn btn-success" type="submit">Search</button>
+            </div>
+            <h3>Search results</h3>
             <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p>
-            <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
+
         </div>
     </div>
+    </form>
+
     <!-- /#page-content-wrapper -->
 
 </div>
@@ -199,7 +202,7 @@ function load_subcats($k = 'j', $it = 'all') {
         $all = ' selected';
     }
 
-    echo "<option value= '$k.$k.$k' $all>all</option>";
+    echo "<option value= 'all' $all>all</option>";
     foreach ($myArray as $s) {
         $sel = '1';
         $s = trim($s);
@@ -209,6 +212,30 @@ function load_subcats($k = 'j', $it = 'all') {
         echo "<option value='$s' $sel>$s</option>";
     }
     echo "</select>";
+}
+
+function load_cat_checkboxes($cat, $subcat = '', $arr = '') {
+    // cases:
+    // a. subcat == 0 && arr == 0 => load all, selected
+    // b. subcat == 0 && arr != 0 => load with selected items
+    // c. subcat != 0 && arr == 0 => don't load checkbox
+    // d. subcat != 0 && arr != 0 => don't load checkbox
+    // USE SAME LOGIC WHEN LOADING THE LIST (moded)
+    if ($subcat != 'all') {
+
+    } else {
+        $file_name = $cat.$cat.$cat.".txt";
+        $myArray = explode("\n", file_get_contents('catlist/'.$file_name));
+
+        foreach ($myArray as $s) {
+            $s = trim($s);
+            $sel = 'checked';
+            if ($arr != '' && !in_array($s, $arr)) {
+                $sel = '';
+            }
+            echo "<input type='checkbox' value='$s' $sel name='check_list[]'>$s<br>";
+        }
+    }
 }
 
 ?>

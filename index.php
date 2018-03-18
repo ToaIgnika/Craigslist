@@ -89,7 +89,7 @@ function load_index_list($name, $file_name) {
     echo '<table class="table table-sm">
                 <thead class="thead-light">
                 <tr >
-                    <th colspan="2"><a href="search.php/?catAbb='.substr($file_name, 0,3).'" class="">'.$name.'</a></th>
+                    <th colspan="2"><a href="search.php?catAbb='.substr($file_name, 0,3).'" class="">'.$name.'</a></th>
                 </tr>
                 </thead>
                 <tbody>';
