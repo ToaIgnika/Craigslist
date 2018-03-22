@@ -1,13 +1,3 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Administrator
- * Date: 2018-03-18
- * Time: 5:16 PM
- */
-
-
-?>
 
 <?php
 /**
@@ -79,7 +69,7 @@
 </html>
 
 <?php
-
+    session_start();
     if(!isset($_GET['category'])) {
         echo '';
         echo 'Pick your category';
@@ -96,6 +86,7 @@
         echo '<input type="submit" value="Submit">';
         echo '</form>';
     } elseif(!(isset($_GET['subcategory']))) {
+
         $file_name = $_GET['category'].".txt";
         $myArray = explode("\n", file_get_contents('catlist/'.$file_name));
 

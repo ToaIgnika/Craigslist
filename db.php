@@ -31,3 +31,19 @@ function getConnection() {
     }
     return $conn;
 }
+
+function getConnection2() {
+    $servername = "localhost";
+    $username = "root";
+    $password = "22alexismad";
+
+// Create connection
+    $db = new mysqli($servername, $username, $password);
+
+
+
+    mysqli_select_db($db, 'test') or
+    die(mysqli_error($db));
+
+    return $db;
+}

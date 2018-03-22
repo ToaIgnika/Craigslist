@@ -131,6 +131,20 @@
     </form>
 
     <!-- /#page-content-wrapper -->
+    <?php
+    include_once "db.php";
+
+    if($_GET['catAbb'] == 'jjj') {
+            load_job_list();
+        }
+
+    if($_GET['catAbb'] == 'hhh') {
+        load_housing_list();
+    }
+    ?>
+
+
+
 
 </div>
 <!-- /#wrapper -->
@@ -147,6 +161,45 @@
     });
 </script>
 <?php
+function load_job_list()
+{
+    $db = getConnection2();
+    $sql = "SELECT * FROM jobs ORDER BY post_date DESC";
+    $result = $db->query($sql);
+    //<a href="./display.php?data=Data1&data2=Data120">Click here</a>
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+
+            echo "<li id='". $row['ID'] .  "'>";
+            echo $row['post_date'] . " ";
+            echo "<a href='postDetail.php/?post_ID=". $row['ID'] . "&cat=jjj" . "'>" . $row['posting_title'] . "</a>";
+            echo " (" . $row['specific_location'] . ") ";
+            echo "<br>";
+            echo "</li>";
+        }
+    }
+}
+
+function load_housing_list() {
+    $db = getConnection2();
+    $sql = "SELECT * FROM housing ORDER BY post_date DESC";
+    $result = $db->query($sql);
+    //<a href="./display.php?data=Data1&data2=Data120">Click here</a>
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+
+            echo "<li id='". $row['ID'] .  "'>";
+            echo $row['post_date'] . " ";
+            echo "<a href='postDetail.php/?post_ID=". $row['ID'] . "&cat=hhh". "'>" . $row['posting_title'] .  "</a>";
+            echo " (" . $row['specific_location'] . ") ";
+            echo "<br>";
+            echo "</li>";
+        }
+    }
+}
+
 
 function load_cats($k = 'j') {
     echo '<select id="catAbb" name = "catAbb">';
