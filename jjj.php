@@ -6,8 +6,57 @@
  * Time: 6:09 PM
  */
 
-echo 'you are in jjj';
+session_start();
+$_SESSION['category'] = "jjj";
 
+include_once "db.php";
+
+// Create connection
+$db = getConnection2();
+
+
+mysqli_select_db($db, 'test') or
+die(mysqli_error($db));
+
+// Check connection
+if ($db->connect_error) {
+    die("Connection failed: " . $db->connect_error);
+}
+$result = $db->query("CREATE TABLE IF NOT EXISTS jobs(
+            ID VARCHAR(40) NOT NULL,            
+            posting_title VARCHAR(40),
+            specific_location VARCHAR(40),
+            postal_code VARCHAR(40),
+            job_description VARCHAR(40),
+            employment_type VARCHAR(40),
+            compensation VARCHAR(40),
+            email VARCHAR(40),
+            phone_number VARCHAR(40),
+            image_id VARCHAR(60),
+            post_date VARCHAR(20),
+            subcategory VARCHAR(20),
+            PRIMARY KEY (ID)
+            );");
+
+
+$_SESSION['subcategory'] = $_GET['subcategory'];
+
+/*
+mysqli_query($db,
+    "CREATE TABLE IF NOT EXISTS jobs(
+                        
+            posting_title VARCHAR(40),
+            specific_location VARCHAR(40),
+            postal_code VARCHAR(40),
+            job_description VARCHAR(40),
+            employment_type VARCHAR(40),
+            compensation VARCHAR(40),
+            email VARCHAR(40),
+            phone_number VARCHAR(40),
+            image_id VARCHAR(40)
+            );"
+);
+*/
 ?>
 
 <!DOCTYPE html>
@@ -53,129 +102,58 @@ echo 'you are in jjj';
 </nav>
 
 
-<!--
- community
- housing
- personals
- for sale
- services
- jobs
- gigs
- -->
+<div class = "col" >
 
-<div class="row">
-
-    <div class="column" style="width: 30%"></div>
-
-    <div class="column" style="width: 40%">
-
-        <div class="posting align-content-sm-center">
-
-
-            <div class="title row fields">
-                <label class="posting-title req">
-                    <div class="label">posting title</div>
-                    <input tabindex="1" type="text" name="PostingTitle" id="PostingTitle" maxlength="70" value="">
-                </label>
-
-                <label class="neighborhood std">
-                    <div class="label">specific location</div>
-                    <input type="text" tabindex="1" name="GeographicArea" id="GeographicArea" size="12" maxlength="40"
-                           value=""></label>
-                <label class="postal-code req">
-                    <div class="label">postal code</div>
-                    <input tabindex="1" id="postal_code" name="postal" size="7" maxlength="15" value="">
-                </label>
+    <form action="postImage.php" enctype="multipart/form-data">
+        <div class = row>
+            <div class = "col" >
+                <div class="label" tabindex="1">post title</div>
+                <input tabindex="1" type="text" name="PostingTitle" id="PostingTitle" maxlength="70" value="">
             </div>
-
-            <div class="row fields">
-                <label class="PostingBody req">
-                    <div>
-                        <small class="onejobonly"><b>Only one job description per posting please.</b><br>Please see our
-                            FAQ
-                            for job posters<a target="_blank"
-                                              href="https://www.craigslist.org/about/help/faq-job">&nbsp;[?]</a></small>
-                        <span class="label">posting body</span>
-                    </div>
-                    <textarea class="req" tabindex="1" rows="5" cols="50" id="PostingBody"
-                              name="PostingBody"></textarea>
-                </label>
+            <div class = "col" >
+                <div class="label" tabindex="1">specific location</div>
+                <input tabindex="1" type="text" name="GeographicArea" id="PostingTitle" maxlength="70" value="">
             </div>
-
-            <div class="row">
-
-            </div>
-
-            <div class="row fields">
-                <fieldset>
-                    <legend>posting details</legend>
-                    <div class="attrline"><label class="req select">
-                            <div class="label">employment type</div>
-                            <select tabindex="1" name="employment_type" id="employment_type">
-                                <option value="">-</option>
-
-                                <option value="1">full-time</option>
-                                <option value="2">part-time</option>
-                                <option value="3">contract</option>
-                                <option value="4">employee's choice</option>
-
-                            </select>
-                        </label>
-                    </div>
-
-                </fieldset>
-            </div>
-
-            <div class="row fields">
-                <label class="req"><span class="label">compensation</span>
-                    <span id="compdet">please be as detailed as possible</span>
-                    <input tabindex="1" class="nreq" size="80" id="remuneration" name="remuneration" value="">
-                </label>
-
-            </div>
-
-            <fieldset style="margin-bottom: 1.5em;">
-                <legend>contact info</legend>
-                <div class="row fields" style="margin-bottom: 0;">
-                    <span>
-                        <label class="req" for="FromEMail">
-                            <div class="label">email</div>
-                        </label>
-                        <input tabindex="1" type="text" class="req df" id="FromEMail" name="FromEMail"
-                               placeholder="Your email address" value="" maxlength="60" autocapitalize="off">
-
-                        <input tabindex="1" type="text" class="req df" id="ConfirmEMail" name="ConfirmEMail"
-                            placeholder="Type email address again" value="" maxlength="60" autocapitalize="off">
-                    </span>
-                    <span id="oiab">
-
-
-</span>
-                </div>
+            <div class = "col" >
+                postal code
                 <br>
-                <div class="row fields" style="margin-bottom: 0;">
-                    <label class="contact_phone std">
-                        <div class="label">phone number</div>
-                        <input type="text" class="std" value="" name="contact_phone" id="contact_phone" size="12"
-                               maxlength="16" tabindex="1">
-                    </label>
-
-                </div>
-            </fieldset>
-
-            Select image to upload:
-
-
-            <input type="text" name="testText">
-            <input type="file" name="fileToUpload" id="fileToUpload">
-
-            <button tabindex="1" class="bigbutton" type="submit" name="go" value="Continue">continue</button>
+                <input type="text" tabindex="1" name="postal" id="GeographicArea" size="12" maxlength="40" value="">
+            </div>
         </div>
 
+        <div class="label"> post description </div>
+        <textarea tabindex="1" rows="10" cols = "100" id="PostingBody" name="PostingBody"></textarea>
 
-    </div>
+        <div class="label"> employment type </div>
+        <select tabindex="1" name="employment_type" id="employment_type">
+            <option value="">-</option>
 
-    <div class="column" style="width:30%"></div>
+            <option value="1">full-time</option>
+            <option value="2">part-time</option>
+            <option value="3">contract</option>
+            <option value="4">employee's choice</option>
+
+        </select>
+
+        <div class="label"> renumeration </div>
+        <input tabindex="1" class="nreq" size="80" id="remuneration" name="remuneration" value="">
+
+        <div class="label"> email </div>
+        <input tabindex="1" type="text" class="req df" id="FromEMail" name="FromEMail" placeholder="Your email address" value="" maxlength="60" autocapitalize="off">
+        <input tabindex="1" type="text" class="req df" id="ConfirmEMail" name="ConfirmEMail" placeholder="Type email address again" value="" maxlength="60" autocapitalize="off">
+
+        <div class="label"> phone number </div>
+        <input type="text" class="std" value="" name="contact_phone" id="contact_phone" size="12" maxlength="16" tabindex="1">
+
+        <BR>
+        <BR>
+        <input type="submit" value="Submit" size="200%">
+    </form>
+
+</div>
+
+
+</div>
 </div>
 
 </body>
