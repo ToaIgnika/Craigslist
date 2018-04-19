@@ -15,13 +15,6 @@ include_once "db.php";
 $db = getConnection2();
 
 
-mysqli_select_db($db, 'test') or
-die(mysqli_error($db));
-
-// Check connection
-if ($db->connect_error) {
-    die("Connection failed: " . $db->connect_error);
-}
 $result = $db->query("CREATE TABLE IF NOT EXISTS jobs(
             ID VARCHAR(40) NOT NULL,            
             posting_title VARCHAR(40),

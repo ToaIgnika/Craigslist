@@ -6,6 +6,7 @@
  * Time: 12:46 PM
  */
 session_start();
+include_once "db.php";
 ?>
 
     <!DOCTYPE html>
@@ -63,11 +64,6 @@ session_start();
 
 function uploadFile($new_ID) {
 
-
-
-
-
-
     $target_dir = "uploads/";
     $target_file = $target_dir . $new_ID . basename($_FILES["fileToUpload"]["name"]);
     $uploadOk = 1;
@@ -119,33 +115,16 @@ function uploadFile($new_ID) {
 
 function sendData($new_ID)
 {
+    $db = getConnection2();
 
-    $servername = "localhost";
-    $username = "root";
-    $password = "22alexismad";
-    $db = new mysqli($servername, $username, $password);
-
-
-    mysqli_select_db($db, 'test') or
-    die(mysqli_error($db));
-
-
-    if ($db->connect_error) {
-        die("Connection failed: " . $db->connect_error);
-    }
-
-
-
-    if($_SESSION['category'] == "jjj") {
+    if($_SESSION['category'] == "ccc") {
         mysqli_query($db, "
-        INSERT INTO jobs(
+        INSERT INTO community(
           ID,
           posting_title,
           specific_location,
           postal_code,
-          job_description,
-          employment_type,
-          compensation,
+          posting_description,
           email,
           phone_number,
           image_id,
@@ -157,10 +136,100 @@ function sendData($new_ID)
           '{$_SESSION['GeographicArea']}',
           '{$_SESSION['postal']}',
           '{$_SESSION['PostingBody']}',
-          '{$_SESSION['employment_type']}',
-          '{$_SESSION['remuneration']}',
-          '{$_SESSION['FromEMail']}',
-          '{$_SESSION['contact_phone']}',
+          '{$_SESSION['email']}',
+          '{$_SESSION['phone_number']}',
+          '{$_SESSION['fileToUpload']}',
+          '{$_SESSION['date']}',
+          '{$_SESSION['subcategory']}'
+        );"
+        ) or die(mysqli_error($db));
+    }
+
+    if($_SESSION['category'] == "eee") {
+        mysqli_query($db, "
+        INSERT INTO housing(
+          ID,
+          posting_title,
+          specific_location,
+          postal_code,
+          housing_description,
+          square_feet,
+          rent,
+          bathrooms,
+          bedrooms,
+          laundry,
+          parking,
+          move_in_month,
+          move_in_day,
+          move_in_year,
+          email,
+          phone_number,
+          image_id,
+          post_date,
+          subcategory
+        ) VALUES (
+          '$new_ID',
+          '{$_SESSION['PostingTitle']}',
+          '{$_SESSION['GeographicArea']}',
+          '{$_SESSION['postal']}',
+          '{$_SESSION['PostingBody']}',
+          '{$_SESSION['square_feet']}',
+          '{$_SESSION['rent']}',
+          '{$_SESSION['bathrooms']}',
+          '{$_SESSION['bedrooms']}',
+          '{$_SESSION['laundry']}',
+          '{$_SESSION['parking']}',
+          '{$_SESSION['move_in_month']}',
+          '{$_SESSION['move_in_day']}',
+          '{$_SESSION['move_in_year']}',
+          '{$_SESSION['email']}',
+          '{$_SESSION['phone_number']}',
+          '{$_SESSION['fileToUpload']}',
+          '{$_SESSION['date']}',
+          '{$_SESSION['subcategory']}'
+        );"
+        ) or die(mysqli_error($db));
+    }
+
+    if($_SESSION['category'] == "ggg") {
+        mysqli_query($db, "
+        INSERT INTO housing(
+          ID,
+          posting_title,
+          specific_location,
+          postal_code,
+          housing_description,
+          square_feet,
+          rent,
+          bathrooms,
+          bedrooms,
+          laundry,
+          parking,
+          move_in_month,
+          move_in_day,
+          move_in_year,
+          email,
+          phone_number,
+          image_id,
+          post_date,
+          subcategory
+        ) VALUES (
+          '$new_ID',
+          '{$_SESSION['PostingTitle']}',
+          '{$_SESSION['GeographicArea']}',
+          '{$_SESSION['postal']}',
+          '{$_SESSION['PostingBody']}',
+          '{$_SESSION['square_feet']}',
+          '{$_SESSION['rent']}',
+          '{$_SESSION['bathrooms']}',
+          '{$_SESSION['bedrooms']}',
+          '{$_SESSION['laundry']}',
+          '{$_SESSION['parking']}',
+          '{$_SESSION['move_in_month']}',
+          '{$_SESSION['move_in_day']}',
+          '{$_SESSION['move_in_year']}',
+          '{$_SESSION['email']}',
+          '{$_SESSION['phone_number']}',
           '{$_SESSION['fileToUpload']}',
           '{$_SESSION['date']}',
           '{$_SESSION['subcategory']}'
@@ -213,6 +282,132 @@ function sendData($new_ID)
         );"
         ) or die(mysqli_error($db));
     }
+
+    if($_SESSION['category'] == "jjj") {
+        mysqli_query($db, "
+        INSERT INTO jobs(
+          ID,
+          posting_title,
+          specific_location,
+          postal_code,
+          job_description,
+          employment_type,
+          compensation,
+          email,
+          phone_number,
+          image_id,
+          post_date,
+          subcategory
+        ) VALUES (
+          '$new_ID',
+          '{$_SESSION['PostingTitle']}',
+          '{$_SESSION['GeographicArea']}',
+          '{$_SESSION['postal']}',
+          '{$_SESSION['PostingBody']}',
+          '{$_SESSION['employment_type']}',
+          '{$_SESSION['remuneration']}',
+          '{$_SESSION['FromEMail']}',
+          '{$_SESSION['contact_phone']}',
+          '{$_SESSION['fileToUpload']}',
+          '{$_SESSION['date']}',
+          '{$_SESSION['subcategory']}'
+        );"
+        ) or die(mysqli_error($db));
+    }
+
+    if($_SESSION['category'] == "ppp") {
+        mysqli_query($db, "
+        INSERT INTO housing(
+          ID,
+          posting_title,
+          specific_location,
+          postal_code,
+          housing_description,
+          square_feet,
+          rent,
+          bathrooms,
+          bedrooms,
+          laundry,
+          parking,
+          move_in_month,
+          move_in_day,
+          move_in_year,
+          email,
+          phone_number,
+          image_id,
+          post_date,
+          subcategory
+        ) VALUES (
+          '$new_ID',
+          '{$_SESSION['PostingTitle']}',
+          '{$_SESSION['GeographicArea']}',
+          '{$_SESSION['postal']}',
+          '{$_SESSION['PostingBody']}',
+          '{$_SESSION['square_feet']}',
+          '{$_SESSION['rent']}',
+          '{$_SESSION['bathrooms']}',
+          '{$_SESSION['bedrooms']}',
+          '{$_SESSION['laundry']}',
+          '{$_SESSION['parking']}',
+          '{$_SESSION['move_in_month']}',
+          '{$_SESSION['move_in_day']}',
+          '{$_SESSION['move_in_year']}',
+          '{$_SESSION['email']}',
+          '{$_SESSION['phone_number']}',
+          '{$_SESSION['fileToUpload']}',
+          '{$_SESSION['date']}',
+          '{$_SESSION['subcategory']}'
+        );"
+        ) or die(mysqli_error($db));
+    }
+
+    if($_SESSION['category'] == "sss") {
+        mysqli_query($db, "
+        INSERT INTO housing(
+          ID,
+          posting_title,
+          specific_location,
+          postal_code,
+          housing_description,
+          square_feet,
+          rent,
+          bathrooms,
+          bedrooms,
+          laundry,
+          parking,
+          move_in_month,
+          move_in_day,
+          move_in_year,
+          email,
+          phone_number,
+          image_id,
+          post_date,
+          subcategory
+        ) VALUES (
+          '$new_ID',
+          '{$_SESSION['PostingTitle']}',
+          '{$_SESSION['GeographicArea']}',
+          '{$_SESSION['postal']}',
+          '{$_SESSION['PostingBody']}',
+          '{$_SESSION['square_feet']}',
+          '{$_SESSION['rent']}',
+          '{$_SESSION['bathrooms']}',
+          '{$_SESSION['bedrooms']}',
+          '{$_SESSION['laundry']}',
+          '{$_SESSION['parking']}',
+          '{$_SESSION['move_in_month']}',
+          '{$_SESSION['move_in_day']}',
+          '{$_SESSION['move_in_year']}',
+          '{$_SESSION['email']}',
+          '{$_SESSION['phone_number']}',
+          '{$_SESSION['fileToUpload']}',
+          '{$_SESSION['date']}',
+          '{$_SESSION['subcategory']}'
+        );"
+        ) or die(mysqli_error($db));
+    }
+
+
 /*
  * $_SESSION['PostingTitle'] = $_GET['PostingTitle'];
             $_SESSION['GeographicArea'] = $_GET['GeographicArea'];
@@ -236,7 +431,7 @@ function sendData($new_ID)
 }
 
 function getThisPostID() {
-    include_once "db.php";
+
     $db = getConnection2();
     $sql = "SELECT * FROM jobs WHERE fromEMail = '{$_SESSION['FromEMail']}'";
     $result = $db->query($sql);

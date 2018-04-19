@@ -1,4 +1,3 @@
-
 <?php
 /**
  * Created by PhpStorm.
@@ -92,15 +91,16 @@
 
         $action = $_GET['category'] . ".php";
         echo '<form action="'.$action.'" >';
-
+        $k = false;
+        $sel = 'checked';
         foreach ($myArray as $s) {
             $s = trim($s);
-            $sel = 'checked';
-            $arr = '';
-            if ($arr != '' && !in_array($s, $arr)) {
+            if($k) {
                 $sel = '';
             }
+            $arr = '';
             echo "<input type='radio' value='$s' $sel name='subcategory'>$s<br>";
+            $k = true;
         }
         echo '<input type="submit" value="Submit">';
         echo '</form>';

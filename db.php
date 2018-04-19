@@ -33,16 +33,16 @@ function getConnection() {
 }
 
 function getConnection2() {
-    $servername = "localhost";
-    $username = "root";
-    $password = "22alexismad";
+    $servername = "drnserver.duckdns.org";
+    $username = "eugene";
+    $password = "g8xsuw&9(U]2\^<&";
 
 // Create connection
     $db = new mysqli($servername, $username, $password);
 
 
 
-    mysqli_select_db($db, 'test') or
+    mysqli_select_db($db, 'cranklist') or
     die(mysqli_error($db));
 
     return $db;

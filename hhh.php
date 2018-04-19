@@ -1,4 +1,3 @@
-
 <?php
 /**
  * Created by PhpStorm.
@@ -14,20 +13,12 @@ include_once "db.php";
 // Create connection
 $db = getConnection2();
 
-
-mysqli_select_db($db, 'test') or
-die(mysqli_error($db));
-
-// Check connection
-if ($db->connect_error) {
-    die("Connection failed: " . $db->connect_error);
-}
 $result = $db->query("CREATE TABLE IF NOT EXISTS housing(
             ID VARCHAR(40) NOT NULL,            
             posting_title VARCHAR(40),
             specific_location VARCHAR(40),
             postal_code VARCHAR(40),
-            housing_description VARCHAR(40),
+            housing_description VARCHAR(600),
             square_feet VARCHAR(40),
             rent VARCHAR(40),
             bathrooms VARCHAR(40),
