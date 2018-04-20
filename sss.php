@@ -78,7 +78,7 @@ mysqli_query($db,
 <body>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark ">
     <a class="navbar-brand mx-auto" href="index.php">Craigslist</a>
-    <form class="form-inline mx-auto" action="/action_page.php">
+    <form class="form-inline mx-auto" action="search.php">
         <input class="form-control mr-sm-2" type="text" placeholder="Search">
         <button class="btn btn-success" type="submit">Search</button>
     </form>

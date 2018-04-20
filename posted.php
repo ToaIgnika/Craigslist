@@ -36,7 +36,7 @@ include_once "db.php";
     <body>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark ">
         <a class="navbar-brand mx-auto" href="index.php">Craigslist</a>
-        <form  class="form-inline mx-auto" action="/action_page.php">
+        <form  class="form-inline mx-auto" action="search.php">
             <input class="form-control mr-sm-2" type="text" placeholder="Search">
             <button class="btn btn-success" type="submit">Search</button>
         </form>
@@ -63,7 +63,9 @@ include_once "db.php";
 <?php
 
 function uploadFile($new_ID) {
-
+    if(!isset($_FILES["fileToUpload"]["name"])) {
+        return;
+    }
     $target_dir = "uploads/";
     $target_file = $target_dir . $new_ID . basename($_FILES["fileToUpload"]["name"]);
     $uploadOk = 1;
@@ -85,7 +87,7 @@ function uploadFile($new_ID) {
         $uploadOk = 0;
     }
 // Check file size
-    if ($_FILES["fileToUpload"]["size"] > 500000) {
+    if ($_FILES["fileToUpload"]["size"] > 5000000) {
         echo "Sorry, your file is too large.";
         $uploadOk = 0;
     }
@@ -116,6 +118,34 @@ function uploadFile($new_ID) {
 function sendData($new_ID)
 {
     $db = getConnection2();
+
+    if($_SESSION['category'] == "bbb") {
+        mysqli_query($db, "
+        INSERT INTO services(
+          ID,
+          posting_title,
+          specific_location,
+          postal_code,
+          posting_description,
+          email,
+          phone_number,
+          price,
+          post_date,
+          subcategory
+        ) VALUES (
+          '$new_ID',
+          '{$_SESSION['PostingTitle']}',
+          '{$_SESSION['GeographicArea']}',
+          '{$_SESSION['postal']}',
+          '{$_SESSION['PostingBody']}',
+          '{$_SESSION['email']}',
+          '{$_SESSION['phone_number']}',
+          '{$_SESSION['price']}',
+          '{$_SESSION['date']}',
+          '{$_SESSION['subcategory']}'
+        );"
+        ) or die(mysqli_error($db));
+    }
 
     if($_SESSION['category'] == "ccc") {
         mysqli_query($db, "
@@ -193,24 +223,15 @@ function sendData($new_ID)
 
     if($_SESSION['category'] == "ggg") {
         mysqli_query($db, "
-        INSERT INTO housing(
+        INSERT INTO gigs(
           ID,
           posting_title,
           specific_location,
           postal_code,
-          housing_description,
-          square_feet,
-          rent,
-          bathrooms,
-          bedrooms,
-          laundry,
-          parking,
-          move_in_month,
-          move_in_day,
-          move_in_year,
+          posting_description,
           email,
           phone_number,
-          image_id,
+          price,
           post_date,
           subcategory
         ) VALUES (
@@ -219,18 +240,9 @@ function sendData($new_ID)
           '{$_SESSION['GeographicArea']}',
           '{$_SESSION['postal']}',
           '{$_SESSION['PostingBody']}',
-          '{$_SESSION['square_feet']}',
-          '{$_SESSION['rent']}',
-          '{$_SESSION['bathrooms']}',
-          '{$_SESSION['bedrooms']}',
-          '{$_SESSION['laundry']}',
-          '{$_SESSION['parking']}',
-          '{$_SESSION['move_in_month']}',
-          '{$_SESSION['move_in_day']}',
-          '{$_SESSION['move_in_year']}',
           '{$_SESSION['email']}',
           '{$_SESSION['phone_number']}',
-          '{$_SESSION['fileToUpload']}',
+          '{$_SESSION['price']}',
           '{$_SESSION['date']}',
           '{$_SESSION['subcategory']}'
         );"

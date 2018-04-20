@@ -13,7 +13,7 @@ include_once "db.php";
 // Create connection
 $db = getConnection2();
 
-$result = $db->query("CREATE TABLE IF NOT EXISTS gigs(
+$result = $db->query("CREATE TABLE IF NOT EXISTS services(
             ID VARCHAR(40) NOT NULL,            
             posting_title VARCHAR(40),
             specific_location VARCHAR(40),
@@ -21,13 +21,13 @@ $result = $db->query("CREATE TABLE IF NOT EXISTS gigs(
             posting_description VARCHAR(600),
             email VARCHAR(40),
             phone_number VARCHAR(40),
-            price VARCHAR(60),
+            price VARCHAR(40),
             post_date VARCHAR(20),
             subcategory VARCHAR(20),
             PRIMARY KEY (ID)
             );");
 
-$_SESSION['category'] = "ggg";
+$_SESSION['category'] = "bbb";
 $_SESSION['subcategory'] = $_GET['subcategory'];
 
 //include_once 'db.php';
@@ -83,7 +83,7 @@ $_SESSION['subcategory'] = $_GET['subcategory'];
 
     <div class = "col" >
 
-        <form action="postImage.php" enctype="multipart/form-data">
+        <form action="posted.php" enctype="multipart/form-data">
             <div class = row>
                 <div class = "col" >
                     <div class="label" tabindex="1">post title</div>
@@ -103,6 +103,8 @@ $_SESSION['subcategory'] = $_GET['subcategory'];
             <div class="label"> post description </div>
             <textarea tabindex="1" rows="10" cols = "100" id="PostingBody" name="PostingBody"></textarea>
             <br>
+            <div class="label"> price </div>
+            <input type="text" tabindex="0" size="4" maxlength="11" name="price" value="">
 
             <div class="label"> email </div>
             <input tabindex="1" type="text" class="req df" id="FromEMail" name="FromEMail" placeholder="Your email address" value="" maxlength="60" autocapitalize="off">

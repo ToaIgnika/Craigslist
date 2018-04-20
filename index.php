@@ -36,7 +36,7 @@
 <body>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark ">
     <a class="navbar-brand mx-auto" href="index.php">Craigslist</a>
-    <form  class="form-inline mx-auto" action="/action_page.php">
+    <form  class="form-inline mx-auto" action="search.php">
         <input class="form-control mr-sm-2" type="text" placeholder="Search">
         <button class="btn btn-success" type="submit">Search</button>
     </form>
@@ -100,11 +100,17 @@ function load_index_list($name, $file_name) {
         } else {
             $f_r = $myArray[$i + (sizeof($myArray))/2];
         }
-        // TODO encode url for search page
-        echo ' <tr>
+        if ($name == "Personals") {
+            echo ' <tr>
+                    <td><a href="ppp.php" class="">'.$f_l.'</a></td>
+                    <td><a href="ppp.php" class="">'.$f_r.'</a></td>
+                </tr>';
+        } else {
+            echo ' <tr>
                     <td><a href="search.php?catAbb='.substr($file_name, 0,3)."&subcatAbb=$f_l".'" class="">'.$f_l.'</a></td>
                     <td><a href="search.php?catAbb='.substr($file_name, 0,3)."&subcatAbb=$f_r".'" class="">'.$f_r.'</a></td>
                 </tr>';
+        }
     }
     echo '</tbody>
             </table>';

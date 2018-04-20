@@ -8,6 +8,76 @@
         session_start();
         setSessionData();
 
+function setSessionData()
+{
+    if ($_SESSION['category'] == "bbb") {
+        $_SESSION['PostingTitle'] = $_GET['PostingTitle'];
+        $_SESSION['GeographicArea'] = $_GET['GeographicArea'];
+        $_SESSION['postal'] = $_GET['postal'];
+        $_SESSION['PostingBody'] = $_GET['PostingBody'];
+        $_SESSION['email'] = $_GET['FromEMail'];
+        $_SESSION['price'] = $_GET['price'];
+        $_SESSION['phone_number'] = $_GET['contact_phone'];
+        $_SESSION['date'] = $date = date('M d');
+        header("Location: /posted.php");
+        exit;
+    }
+
+    if ($_SESSION['category'] == "ccc") {
+        $_SESSION['PostingTitle'] = $_GET['PostingTitle'];
+        $_SESSION['GeographicArea'] = $_GET['GeographicArea'];
+        $_SESSION['postal'] = $_GET['postal'];
+        $_SESSION['PostingBody'] = $_GET['PostingBody'];
+        $_SESSION['email'] = $_GET['FromEMail'];
+        $_SESSION['phone_number'] = $_GET['contact_phone'];
+        $_SESSION['date'] = $date = date('M d');
+    }
+
+    if ($_SESSION['category'] == "ggg") {
+        $_SESSION['PostingTitle'] = $_GET['PostingTitle'];
+        $_SESSION['GeographicArea'] = $_GET['GeographicArea'];
+        $_SESSION['postal'] = $_GET['postal'];
+        $_SESSION['PostingBody'] = $_GET['PostingBody'];
+        $_SESSION['email'] = $_GET['FromEMail'];
+        $_SESSION['price'] = $_GET['price'];
+        $_SESSION['phone_number'] = $_GET['contact_phone'];
+        $_SESSION['date'] = $date = date('M d');
+        header("Location: /posted.php");
+        exit;
+    }
+
+    if ($_SESSION['category'] == "jjj") {
+        $_SESSION['PostingTitle'] = $_GET['PostingTitle'];
+        $_SESSION['GeographicArea'] = $_GET['GeographicArea'];
+        $_SESSION['postal'] = $_GET['postal'];
+        $_SESSION['PostingBody'] = $_GET['PostingBody'];
+        $_SESSION['employment_type'] = $_GET['employment_type'];
+        $_SESSION['remuneration'] = $_GET['remuneration'];
+        $_SESSION['FromEMail'] = $_GET['FromEMail'];
+        $_SESSION['contact_phone'] = $_GET['contact_phone'];
+        $_SESSION['date'] = $date = date('M d');
+    }
+
+    if ($_SESSION['category'] == "hhh") {
+        $_SESSION['PostingTitle'] = $_GET['PostingTitle'];
+        $_SESSION['GeographicArea'] = $_GET['GeographicArea'];
+        $_SESSION['postal'] = $_GET['postal'];
+        $_SESSION['PostingBody'] = $_GET['PostingBody'];
+        $_SESSION['square_feet'] = $_GET['Sqft'];
+        $_SESSION['rent'] = $_GET['price'];
+        $_SESSION['bedrooms'] = $_GET['bedrooms'];
+        $_SESSION['bathrooms'] = $_GET['bathrooms'];
+        $_SESSION['laundry'] = $_GET['laundry'];
+        $_SESSION['parking'] = $_GET['parking'];
+        $_SESSION['move_in_day'] = $_GET['moveinDay'];
+        $_SESSION['move_in_month'] = $_GET['moveinMonth'];
+        $_SESSION['move_in_year'] = $_GET['moveinYear'];
+        // $_SESSION[''] = $_GET[''];
+        $_SESSION['email'] = $_GET['FromEMail'];
+        $_SESSION['phone_number'] = $_GET['contact_phone'];
+        $_SESSION['date'] = $date = date('M d');
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -62,41 +132,3 @@
 
 </html>
 
-<?PHP
-    function setSessionData()
-    {
-        if ($_SESSION['category'] == "jjj") {
-            $_SESSION['PostingTitle'] = $_GET['PostingTitle'];
-            $_SESSION['GeographicArea'] = $_GET['GeographicArea'];
-            $_SESSION['postal'] = $_GET['postal'];
-            $_SESSION['PostingBody'] = $_GET['PostingBody'];
-            $_SESSION['employment_type'] = $_GET['employment_type'];
-            $_SESSION['remuneration'] = $_GET['remuneration'];
-            $_SESSION['FromEMail'] = $_GET['FromEMail'];
-            $_SESSION['contact_phone'] = $_GET['contact_phone'];
-            $_SESSION['date'] = $date = date('M d');
-        }
-
-        if ($_SESSION['category'] == "hhh") {
-            $_SESSION['PostingTitle'] = $_GET['PostingTitle'];
-            $_SESSION['GeographicArea'] = $_GET['GeographicArea'];
-            $_SESSION['postal'] = $_GET['postal'];
-            $_SESSION['PostingBody'] = $_GET['PostingBody'];
-            $_SESSION['square_feet'] = $_GET['Sqft'];
-            $_SESSION['rent'] = $_GET['price'];
-            $_SESSION['bedrooms'] = $_GET['bedrooms'];
-            $_SESSION['bathrooms'] = $_GET['bathrooms'];
-            $_SESSION['laundry'] = $_GET['laundry'];
-            $_SESSION['parking'] = $_GET['parking'];
-            $_SESSION['move_in_day'] = $_GET['moveinDay'];
-            $_SESSION['move_in_month'] = $_GET['moveinMonth'];
-            $_SESSION['move_in_year'] = $_GET['moveinYear'];
-           // $_SESSION[''] = $_GET[''];
-
-            $_SESSION['email'] = $_GET['FromEMail'];
-            $_SESSION['phone_number'] = $_GET['contact_phone'];
-            $_SESSION['date'] = $date = date('M d');
-
-        }
-    }
-?>
